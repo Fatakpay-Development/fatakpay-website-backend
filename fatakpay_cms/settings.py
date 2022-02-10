@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'about_us',
     'corporate',
     'faq',
+    'home_page',
 ]
 
 MIDDLEWARE = [
