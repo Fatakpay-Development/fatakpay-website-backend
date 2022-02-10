@@ -1,3 +1,1 @@
-from django.shortcuts import render
-
-# Create your views here.
+from about_us.subviews.about_us import *
