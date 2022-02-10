@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'careers',
+    'contact_us',
     'about_us',
     'corporate',
     'faq',
