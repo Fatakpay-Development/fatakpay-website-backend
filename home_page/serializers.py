@@ -1,0 +1,19 @@
+from rest_framework import serializers
+from rest_framework import fields
+from home_page.models import *
+
+class GetWatchVideoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WatchVideo
+        fields = ['video']
+
+
+class PostSingUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SingUp
+        fields = ['full_name', 'email','contact']
+
+class GetTestmonialsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testmonials
+        fields = ['profile_image','full_name','designation','logo','rating','title','description']
