@@ -13,7 +13,4 @@ class ContactUs(models.Model):
     
     class Meta:
         db_table = "ContactUs"
-
-    #verbose
-
-    verbose_name_plural = 'ContactUs'
+        verbose_name_plural = 'ContactUs'

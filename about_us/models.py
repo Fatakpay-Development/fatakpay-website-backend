@@ -26,7 +26,4 @@ class AboutUs(models.Model):
     
     class Meta:
         db_table = "AboutUs"
-
-    #verbose
-
-    verbose_name_plural = 'AboutUs'
+        verbose_name_plural = 'AboutUs'

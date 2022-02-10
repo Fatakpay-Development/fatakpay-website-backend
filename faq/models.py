@@ -13,7 +13,5 @@ class Faq(models.Model):
     
     class Meta:
         db_table = 'Faq'
+        verbose_name_plural = 'Faq'
 
-    #verbose
-
-    verbose_name_plural = 'Faq'
