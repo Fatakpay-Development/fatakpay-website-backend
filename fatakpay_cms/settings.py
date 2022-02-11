@@ -25,13 +25,22 @@ SECRET_KEY = 'django-insecure-n9fg09*)wbpi0wek^yt^ym2m3jgz3x!nv_c9&3l%harzs5=fif
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+        'http://localhost:4200',
+        'http://apiwebsite.fatakpay.com',
+        'https://apiwebsite.fatakpay.com',
+)
+
+CSRF_TRUSTED_ORIGINS = ["http://apiwebsite.fatakpay.com", "https://apiwebsite.fatakpay.com"]
 
 # Application definition
 
 INSTALLED_APPS = [
     'grappelli',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,8 +136,8 @@ DATABASES = {
     'NAME': 'fatakpay',  
     'HOST': 'localhost',
     'PORT': '3306',
-    'USER': 'admin',
-    'PASSWORD': 'admin',
+    'USER': 'root',
+    'PASSWORD': 'testings',
 }
 }
 
