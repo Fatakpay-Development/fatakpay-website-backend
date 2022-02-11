@@ -8,9 +8,9 @@ class GetWatchVideoListSerializer(serializers.ModelSerializer):
         fields = ['video']
 
 
-class PostSingUpSerializer(serializers.ModelSerializer):
+class PostSignUpSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SingUp
+        model = SignUp
         fields = ['full_name', 'email','contact']
 
 class GetTestmonialsListSerializer(serializers.ModelSerializer):
