@@ -9,7 +9,10 @@ class Career(models.Model):
     updated_at      = models.DateTimeField(auto_now=True, blank=True, null=True,)
     is_deleted      = models.BooleanField(default = False)
     created_by      = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Career_User', blank=True, null=True,)
-        
+
+    def __str__(self): 
+        return str(self.designation)
+
     class Meta:
         db_table = "Career"
         verbose_name_plural = 'Career'
@@ -17,9 +20,9 @@ class Career(models.Model):
 
 class ApplicationForm(models.Model):
     full_name       = models.CharField(max_length=100, blank=True, null=True,)
-    email           = models.EmailField(max_length=100, blank=True, null=True,)
-    contact         = models.CharField(max_length=10, blank=True, null=True,)
-    linkedin_link   = models.CharField(max_length=100, blank=True, null=True,)
+    email           = models.CharField(max_length=100, blank=True, null=True,)
+    contact         = models.CharField(max_length=15, blank=True, null=True,)
+    linkedin_link   = models.TextField(blank=True, null=True)
     resume          = models.FileField(upload_to = "images/resume", blank=True, null=True)
     designation     = models.ForeignKey('Career', on_delete=models.CASCADE, related_name='ApplicationForm_Career', blank=True, null=True,)
 

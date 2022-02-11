@@ -22,9 +22,9 @@ class GetWatchVideoListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class PostSingUpAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
-    queryset            = SingUp.objects.all()
-    serializer_class    = PostSingUpSerializer
+class PostSignUpAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset            = SignUp.objects.all()
+    serializer_class    = PostSignUpSerializer
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

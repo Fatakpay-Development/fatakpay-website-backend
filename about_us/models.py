@@ -18,11 +18,15 @@ class AboutUs(models.Model):
     profile         =   models.ImageField(upload_to="images/aboutus_profile", blank=True, null=True)
     description     =   models.TextField(blank=True, null=True)
     employee_type   =   models.CharField(max_length=4, choices=EMPLOYEE_CHOICES, default=CHOICE_TEAM)
-    linkedin_link   =   models.URLField(max_length =100, blank=True, null=True)
+    linkedin_link   =   models.TextField(blank=True, null=True)
+    
     created_at      =   models.DateTimeField(auto_now_add=True, blank=True, null=True,)
     updated_at      =   models.DateTimeField(auto_now=True, blank=True, null=True,)
     is_deleted      =   models.BooleanField(default=False)
     created_by      =   models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self): 
+        return str(self.employee_name)
     
     class Meta:
         db_table = "AboutUs"
