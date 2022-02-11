@@ -21,7 +21,7 @@ class SingUp(models.Model):
 
 
 class WatchVideo(models.Model):
-    video           =  models.FileField(upload_to = "images/watch_video", blank=True, null=True)
+    video           = models.CharField(max_length=100, blank=True, null=True,)
 
     created_at      = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at      = models.DateTimeField(auto_now=True, blank=True, null=True,)

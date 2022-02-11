@@ -22,8 +22,6 @@ class GetCareerListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
     try:
         queryset            = Career.objects.all()
         serializer_class    = GetCareerListSerializer
-        
-        print(hey)
 
         def get(self, request, *args, **kwargs):
             return self.list(request, *args, **kwargs)
