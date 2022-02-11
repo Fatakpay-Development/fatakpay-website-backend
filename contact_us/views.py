@@ -1,3 +1,1 @@
-from django.shortcuts import render
-
-# Create your views here.
+from contact_us.subviews.contact_us import *
