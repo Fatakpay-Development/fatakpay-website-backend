@@ -10,23 +10,11 @@ class GetContactUsListSerializer(serializers.ModelSerializer):
         fields = ['full_name', 'email', 'message']
 
 class PostContactUsSerializer(serializers.ModelSerializer):
+    full_name   = serializers.CharField(required=True)
+    email       = serializers.CharField(required=True)
+    message     = serializers.CharField(required=True, max_length=None, min_length=None,)
+
     class Meta:
         model = ContactUs
         fields = ['full_name', 'email', 'message']
-        
-    def validate_full_name(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Name Is Required")
-        
-    def validate_email(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Email Is Required")
-    
-    def validate_message(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Message Is Required")
-
    
