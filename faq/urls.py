@@ -5,5 +5,5 @@ from faq.views import *
 
 urlpatterns = [
     
-    path('get_faq/',  GetFaqListAPIView.as_view()),
+    path('v1/faq/',  FaqListAPIView.as_view()),
 ]
