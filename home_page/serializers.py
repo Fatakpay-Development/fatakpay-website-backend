@@ -13,6 +13,22 @@ class PostSignUpSerializer(serializers.ModelSerializer):
         model = SignUp
         fields = ['full_name', 'email','contact']
 
+    def validate_full_name(self, value):
+        if value != "":
+            return value
+        raise serializers.ValidationError("Name Is Required")
+        
+    def validate_email(self, value):
+        if value != "":
+            return value
+        raise serializers.ValidationError("Email Is Required")
+    
+    def validate_contact(self, value):
+        if value != "":
+            return value
+        raise serializers.ValidationError("Contact Is Required")
+
+
 class GetTestmonialsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testmonials

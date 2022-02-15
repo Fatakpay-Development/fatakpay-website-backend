@@ -5,33 +5,49 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework import mixins
 from rest_framework import status, generics
-from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 class LargeResultsSetPagination(PageNumberPagination):
     page_size           = 1
     page_size_query_param = 'page_size'
     max_page_size       = 1
 
-class GetWatchVideoListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset            = WatchVideo.objects.all()
-    serializer_class    = GetWatchVideoListSerializer
+class WatchVideoListAPIView(APIView):
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    def get(self, request, format=None):
+        data = WatchVideo.objects.all()
+        serializer = GetWatchVideoListSerializer(data, many=True)
+        return Response({
+                        'success': True,
+                        'status_code': status.HTTP_200_OK,
+                        'message': 'Watchvideo List Fetch SuccessFully',
+                        'data': serializer.data},
+                        status = status.HTTP_200_OK)
 
 
-class PostSignUpAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
-    queryset            = SignUp.objects.all()
-    serializer_class    = PostSignUpSerializer
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+class SignUpListAPIView(APIView):
+    
+    def post(self, request, format=None):
+        serializer = PostSignUpSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class GetTestmonialsListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset            = Testmonials.objects.all()
-    serializer_class    = GetTestmonialsListSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+
+class TestmonialsListAPIView(APIView):
+
+    def get(self, request, format=None):
+        data = Testmonials.objects.all()
+        serializer = GetTestmonialsListSerializer(data, many=True)
+        return Response({
+                        'success': True,
+                        'status_code': status.HTTP_200_OK,
+                        'message': 'Testmonials List Fetch SuccessFully',
+                        'data': serializer.data},
+                        status = status.HTTP_200_OK)

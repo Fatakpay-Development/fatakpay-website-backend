@@ -6,18 +6,38 @@ from rest_framework import filters
 from rest_framework import mixins
 from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class AboutUsListAPIView(APIView):
+            
+    def get(self, request, format=None):
+        data = AboutUs.objects.all()
+        serializer = GetAboutUsListSerializer(data, many=True)
+        return Response({
+                    'success': True,
+                    'status_code': status.HTTP_200_OK,
+                    'message': 'AboutUs List Fetch SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_200_OK)
 
 
-class GetAboutUsListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset            = AboutUs.objects.all()
-    serializer_class    = GetAboutUsListSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
-class GetAboutUsDetailAPIView(mixins.RetrieveModelMixin, generics.GenericAPIView):
-    queryset            = AboutUs.objects.all()
-    serializer_class    = GetAboutUsDetailSerializer
+class AboutUsDetailAPIView(APIView):
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    def get_object(self, pk):
+        try:
+            return AboutUs.objects.get(pk=pk)
+        except AboutUs.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        data = self.get_object(pk)
+        serializer = GetAboutUsDetailSerializer(data)
+        return Response({
+                    'success': True,
+                    'status_code': status.HTTP_200_OK,
+                    'message': 'AboutUs Detail Fetch SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_200_OK)
+    

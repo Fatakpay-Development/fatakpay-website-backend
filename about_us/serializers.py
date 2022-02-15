@@ -7,7 +7,7 @@ from about_us.models import *
 class GetAboutUsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutUs
-        fields = ['employee_name','designation','profile','description','employee_type','linkedin_link']
+        fields = ['id','employee_name','designation','profile','description','employee_type','linkedin_link']
 
 
 class GetAboutUsDetailSerializer(serializers.ModelSerializer):

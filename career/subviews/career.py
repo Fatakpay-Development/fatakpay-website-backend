@@ -3,13 +3,13 @@ from career.models import *
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-from rest_framework import mixins
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from utils import custom_exceptions as ce
 import logging
+from rest_framework.views import APIView
 
 logger = logging.getLogger('career')
 
@@ -18,13 +18,19 @@ class LargeResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size       = 1
 
-class GetCareerListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    try:
-        queryset            = Career.objects.all()
-        serializer_class    = GetCareerListSerializer
 
-        def get(self, request, *args, **kwargs):
-            return self.list(request, *args, **kwargs)
+class CareerListAPIView(APIView):
+    try:
+        def get(self, request, format=None):
+            data = Career.objects.all()
+            serializer = GetCareerListSerializer(data, many=True)
+            return Response({
+                        'success': True,
+                        'status_code': status.HTTP_200_OK,
+                        'message': 'Career List Fetch SuccessFully',
+                        'data': serializer.data},
+                        status = status.HTTP_200_OK)
+
     except NameError as e:
         logger.error('GET CAREER API VIEW : {}'.format( e))
         raise ce.NameErrorCe
@@ -50,9 +56,12 @@ class GetCareerListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
         raise ce.InternalServerError
 
 
-class PostApplicationFormAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
-    queryset            = ApplicationForm.objects.all()
-    serializer_class    = PostApplicationFormSerializer
+class ApplicationFormAPIView(APIView):
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def post(self, request, format=None):
+        serializer = PostApplicationFormSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
