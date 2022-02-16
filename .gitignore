@@ -13,8 +13,7 @@ web/docs/*
 digikosh/media/*
 web/src/pages/templates/pages/email-blueprints/*
 web/src/pages/templates/email-blueprints/.git/*
-digikosh/digikosh/local_settings.py
-digikosh/digikosh/settings.py
+fatakpay_cms/local_settings.py
 *.pyc
 media/*
 *Lib*
