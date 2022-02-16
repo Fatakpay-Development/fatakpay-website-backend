@@ -4,3 +4,5 @@ Django==4.0.2
 django-grappelli==3.0.2
 sqlparse==0.4.2
 tzdata==2021.5
+boto3==1.18.30
+botocore==1.21.30

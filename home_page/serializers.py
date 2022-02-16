@@ -9,24 +9,20 @@ class GetWatchVideoListSerializer(serializers.ModelSerializer):
 
 
 class PostSignUpSerializer(serializers.ModelSerializer):
+    full_name   = serializers.CharField(required=True)
+    email       = serializers.CharField(required=True)
     class Meta:
         model = SignUp
         fields = ['full_name', 'email','contact']
 
-    def validate_full_name(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Name Is Required")
-        
-    def validate_email(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Email Is Required")
-    
     def validate_contact(self, value):
-        if value != "":
-            return value
-        raise serializers.ValidationError("Contact Is Required")
+        d = SignUp.objects.filter(contact=value).exists()
+        if d == False:
+            if value != "":
+                return value
+            raise serializers.ValidationError("Contact Is Required")
+        raise serializers.ValidationError("Contact Is All Ready Exist")
+
 
 
 class GetTestmonialsListSerializer(serializers.ModelSerializer):
