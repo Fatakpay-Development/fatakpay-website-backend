@@ -39,16 +39,19 @@ CSRF_TRUSTED_ORIGINS = ["http://apiwebsite.fatakpay.com", "https://apiwebsite.fa
 # Application definition
 
 INSTALLED_APPS = [
+    # 3rd party apps
+    'django_summernote',
     'grappelli',
     'corsheaders',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Local Apps
     'contact_us',
-    'rest_framework',
     'career',
     'about_us',
     'corporate',

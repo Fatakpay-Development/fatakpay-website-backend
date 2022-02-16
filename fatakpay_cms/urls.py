@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS
+    path('summernote/', include('django_summernote.urls')),# summernote URLS
     path('admin/', admin.site.urls),
     path('', include('about_us.urls')),
     path('', include('contact_us.urls')),
