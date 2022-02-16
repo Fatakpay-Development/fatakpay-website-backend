@@ -136,8 +136,8 @@ DATABASES = {
     'NAME': 'fatakpay',  
     'HOST': 'localhost',
     'PORT': '3306',
-    'USER': 'root',
-    'PASSWORD': 'testings',
+    'USER': 'admin',
+    'PASSWORD': 'admin',
 }
 }
 
@@ -203,8 +203,6 @@ REST_FRAMEWORK = {
     ],
     'EXCEPTION_HANDLER': 'utils.exception_handler.custom_exception_handler',
 }
-<<<<<<< HEAD
-=======
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -220,4 +218,3 @@ AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
 AWS_ACCESS_KEY_ID = 'AKIA2OQUXMU7WZF4ZUND'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'dev-fatakpay'
->>>>>>> 4f93141dff57681c63163c871f89299e88d6eea9
