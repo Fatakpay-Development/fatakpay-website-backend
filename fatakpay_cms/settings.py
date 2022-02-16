@@ -136,8 +136,8 @@ DATABASES = {
     'NAME': 'fatakpay',  
     'HOST': 'localhost',
     'PORT': '3306',
-    'USER': 'admin',
-    'PASSWORD': 'admin',
+    'USER': 'root',
+    'PASSWORD': 'testings',
 }
 }
 
