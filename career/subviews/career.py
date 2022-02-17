@@ -56,6 +56,24 @@ class CareerListAPIView(APIView):
         raise ce.InternalServerError
 
 
+class CareerDetailAPIView(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Career.objects.get(pk=pk)
+        except Career.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        data = self.get_object(pk)
+        serializer = GetCareerListSerializer(data)
+        return Response({
+                    'success': True,
+                    'status_code': status.HTTP_200_OK,
+                    'message': 'AboutUs Detail Fetch SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_200_OK)
+
 class ApplicationFormAPIView(APIView):
 
     def post(self, request, format=None):
