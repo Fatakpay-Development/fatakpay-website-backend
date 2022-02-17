@@ -70,7 +70,7 @@ class CareerDetailAPIView(APIView):
         return Response({
                     'success': True,
                     'status_code': status.HTTP_200_OK,
-                    'message': 'AboutUs Detail Fetch SuccessFully',
+                    'message': 'job Detail Fetch SuccessFully',
                     'data': serializer.data},
                     status = status.HTTP_200_OK)
 
