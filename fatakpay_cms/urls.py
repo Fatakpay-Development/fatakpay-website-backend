@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('faq.urls')),
     path('', include('career.urls')),
     path('', include('home_page.urls')),
+    path('', include('corporate.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
