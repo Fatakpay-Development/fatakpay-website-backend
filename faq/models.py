@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Faq(models.Model):
+    USER_CHOICES = [
+                    ('U', 'user'),
+                    ('E', 'employee')]
+    user_type   =   models.CharField(max_length=4, choices=USER_CHOICES, default="user")
+
     question       =    models.TextField(null=True, blank=True)
     answer         =    models.TextField(null=True, blank=True)
     
