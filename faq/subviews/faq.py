@@ -13,15 +13,21 @@ import django_filters
 
 
 class FaqListAPIView(APIView):
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['Customer']
 
     def get(self, request, format=None):
+        response = {}
+        responsedata = []
+
         data = Faq.objects.all()
-        serializer = GetFaqListSerializer(data, many=True)
-        return Response({
-                        'success': True,
-                        'status_code': status.HTTP_200_OK,
-                        'message': 'Faq Application Faq List Fetch SuccessFully',
-                        'data': serializer.data},
-                        status = status.HTTP_200_OK)
+
+        if request.query_params.get('user_type'):
+            data = data.filter(user_type=request.query_params.get('user_type'))
+
+        serializers = GetFaqListSerializer(data, many=True)
+
+        responsedata.append('Faq Application Faq List Fetch SuccessFully.')
+        response['success'] = True
+        response['status'] = status.HTTP_200_OK
+        response['message'] = responsedata
+        response['data'] = serializers.data
+        return Response(response)
