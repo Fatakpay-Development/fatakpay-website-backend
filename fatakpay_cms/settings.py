@@ -32,6 +32,10 @@ CORS_ORIGIN_WHITELIST = (
         'http://localhost:4200',
         'http://apiwebsite.fatakpay.com',
         'https://apiwebsite.fatakpay.com',
+        'https://devwebsite.fatakpay.com',
+        'http://devwebsite.fatakpay.com',
+        'https://fatakpay.com',
+        'http://fatakpay.com'
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://apiwebsite.fatakpay.com", "https://apiwebsite.fatakpay.com"]
