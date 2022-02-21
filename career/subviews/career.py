@@ -77,7 +77,12 @@ class CareerDetailAPIView(APIView):
 class ApplicationFormAPIView(APIView):
 
     def post(self, request, format=None):
+
         serializer = PostApplicationFormSerializer(data=request.data)
+
+        designation_obj = Career.objects.get(id=request.data['designation'])
+        request.data['designation'] = designation_obj.id
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

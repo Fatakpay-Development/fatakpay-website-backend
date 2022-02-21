@@ -24,7 +24,7 @@ class CareerSummer(SummernoteModelAdmin):
         return False
 
     def save_model(self, request, obj, form, change):
-        platform_user   = User.objects.get(user=request.user)
+        platform_user   = User.objects.get(username=request.user)
 
         obj.created_by  = platform_user
         obj.save()
