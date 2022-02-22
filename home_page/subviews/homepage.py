@@ -18,7 +18,7 @@ class LargeResultsSetPagination(PageNumberPagination):
 class WatchVideoListAPIView(APIView):
 
     def get(self, request, format=None):
-        data = WatchVideo.objects.all()
+        data = WatchVideo.objects.filter(is_deleted=False)
         serializer = GetWatchVideoListSerializer(data, many=True)
         return Response({
                         'success': True,
@@ -43,7 +43,7 @@ class SignUpListAPIView(APIView):
 class TestmonialsListAPIView(APIView):
 
     def get(self, request, format=None):
-        data = Testmonials.objects.all()
+        data = Testmonials.objects.filter(is_deleted=False)
         serializer = GetTestmonialsListSerializer(data, many=True)
         return Response({
                         'success': True,

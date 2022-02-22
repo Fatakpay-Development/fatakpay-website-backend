@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 class ContactUsListAPIView(APIView):
 
     def get(self, request, format=None):
-        data = ContactUs.objects.all()
+        data = ContactUs.objects.filter(is_deleted=False)
         serializer = GetContactUsListSerializer(data, many=True)
         return Response({
             'success': True,

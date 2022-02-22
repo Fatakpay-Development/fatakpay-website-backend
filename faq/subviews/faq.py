@@ -18,7 +18,7 @@ class FaqListAPIView(APIView):
         response = {}
         responsedata = []
 
-        data = Faq.objects.all()
+        data = Faq.objects.filter(is_deleted=False)
 
         if request.query_params.get('user_type'):
             data = data.filter(user_type=request.query_params.get('user_type'))
