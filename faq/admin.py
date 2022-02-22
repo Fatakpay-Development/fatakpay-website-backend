@@ -5,7 +5,7 @@ from django.contrib import admin
 
 @admin.register(Faq)
 class FaqAdmin(admin.ModelAdmin):
-    list_display        = ("user_type", "question","answer","created_at","updated_at","is_deleted","created_by")
+    list_display        = ("user_type", "question","answer","priority","created_at","updated_at","is_deleted","created_by")
     readonly_fields     = ('created_by',)
 
     def has_delete_permission(self, request, obj=None):

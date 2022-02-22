@@ -11,6 +11,8 @@ class Faq(models.Model):
 
     question       =    models.TextField(null=True, blank=True)
     answer         =    models.TextField(null=True, blank=True)
+    priority       =    models.FloatField(null=True, blank=True)
+    
     
     created_at      =   models.DateTimeField(auto_now_add=True, blank=True, null=True,)
     updated_at      =   models.DateTimeField(auto_now=True, blank=True, null=True,)

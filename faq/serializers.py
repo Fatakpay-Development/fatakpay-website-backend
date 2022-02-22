@@ -6,4 +6,4 @@ from faq.models import *
 class GetFaqListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faq
-        fields = ['user_type','question','answer']
+        fields = ['priority','user_type','question','answer']
