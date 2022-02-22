@@ -11,8 +11,8 @@ from rest_framework.views import APIView
 class AboutUsListAPIView(APIView):
             
     def get(self, request, format=None):
-        data = AboutUs.objects.all()
-        serializer = GetAboutUsListSerializer(data, many=True)
+        data        = AboutUs.objects.filter(is_deleted=False)
+        serializer  = GetAboutUsListSerializer(data, many=True)
         return Response({
                     'success': True,
                     'status_code': status.HTTP_200_OK,
