@@ -23,6 +23,7 @@ class CareerListAPIView(APIView):
     try:
         def get(self, request, format=None):
             data = Career.objects.all()
+            data = data.order_by('priority')
             serializer = GetCareerListSerializer(data, many=True)
             return Response({
                         'success': True,

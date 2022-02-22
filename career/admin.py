@@ -13,7 +13,7 @@ class ApplicationFormAdmin(admin.ModelAdmin):
 
 @admin.register(Career)
 class CareerSummer(SummernoteModelAdmin):
-    list_display = ('designation', 'location', 'report_to','employee_type', 'created_at', 'updated_at', 'is_deleted', 'created_by')
+    list_display = ('designation', 'priority', 'location', 'report_to','employee_type', 'created_at', 'updated_at', 'is_deleted', 'created_by')
     list_filter = ("location","report_to","employee_type")
     search_fields = ['location', 'report_to']
     summernote_fields = ('expect_from_you',"ideal_candidate","love_working_fpay","perks_benefits")

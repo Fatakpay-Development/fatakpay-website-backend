@@ -5,7 +5,7 @@ from career.models import *
 class GetCareerListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Career
-        fields = ['id','image', 'designation',"location","report_to","employee_type","expect_from_you","ideal_candidate","love_working_fpay","perks_benefits"]
+        fields = ['id','image', 'designation',"priority", "location","report_to","employee_type","expect_from_you","ideal_candidate","love_working_fpay","perks_benefits"]
 
 
 class PostApplicationFormSerializer(serializers.ModelSerializer):

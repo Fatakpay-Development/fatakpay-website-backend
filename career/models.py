@@ -8,6 +8,7 @@ class Career(models.Model):
     location            = models.CharField(max_length=100, blank=True, null=True,)
     report_to           = models.CharField(max_length=100, blank=True, null=True,)
     employee_type       = models.CharField(max_length=250, blank=True, null=True,)
+    priority            = models.FloatField(null=True, blank=True)
     expect_from_you     = models.TextField(blank=True, null=True,)
     ideal_candidate     = models.TextField(blank=True, null=True,)
     love_working_fpay   = models.TextField(blank=True, null=True,)
