@@ -15,16 +15,6 @@ class PostSignUpSerializer(serializers.ModelSerializer):
         model = SignUp
         fields = ['full_name', 'email','contact']
 
-    def validate_contact(self, value):
-        d = SignUp.objects.filter(contact=value).exists()
-        if d == False:
-            if value != "":
-                return value
-            raise serializers.ValidationError("Contact Is Required")
-        raise serializers.ValidationError("Contact Is All Ready Exist")
-
-
-
 class GetTestmonialsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testmonials

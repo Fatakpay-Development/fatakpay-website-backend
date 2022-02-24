@@ -22,7 +22,7 @@ class LargeResultsSetPagination(PageNumberPagination):
 class CareerListAPIView(APIView):
     try:
         def get(self, request, format=None):
-            data = Career.objects.all()
+            data = Career.objects.filter(is_deleted=False)
             data = data.order_by('priority')
             serializer = GetCareerListSerializer(data, many=True)
             return Response({
