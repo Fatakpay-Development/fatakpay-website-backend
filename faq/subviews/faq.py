@@ -23,6 +23,9 @@ class FaqListAPIView(APIView):
         if request.query_params.get('user_type'):
             data = data.filter(user_type=request.query_params.get('user_type'))
 
+        if request.query_params.get('is_important'):
+            data = data.filter(is_important=True)
+
         data = data.order_by('priority')
 
         serializers = GetFaqListSerializer(data, many=True)

@@ -9,9 +9,10 @@ class Faq(models.Model):
                     ('E', 'employee')]
     user_type   =   models.CharField(max_length=4, choices=USER_CHOICES, default="user")
 
-    question       =    models.TextField(null=True, blank=True)
-    answer         =    models.TextField(null=True, blank=True)
-    priority       =    models.FloatField(null=True, blank=True)
+    question        =   models.TextField(null=True, blank=True)
+    answer          =   models.TextField(null=True, blank=True)
+    priority        =   models.FloatField(null=True, blank=True)
+    is_important    =   models.BooleanField(default=False)
     
     
     created_at      =   models.DateTimeField(auto_now_add=True, blank=True, null=True,)
