@@ -10,7 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from utils import custom_exceptions as ce
 import logging
 from rest_framework.views import APIView
-
+from fatakpay_cms.mail import custom_mail
 logger = logging.getLogger('career')
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -85,7 +85,12 @@ class ApplicationFormAPIView(APIView):
             request.data['designation'] = designation_obj.id
 
         if serializer.is_valid():
-            serializer.save()
+            email_id = serializer.validated_data.get('email')
+            Subject = 'here is mail from aniket',
+            Message = 'here is message from aniket',
+            To = [email_id]
+            custom_mail(Subject, Message, To)
+            serializer.save(status=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

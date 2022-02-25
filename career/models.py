@@ -34,6 +34,8 @@ class ApplicationForm(models.Model):
     linkedin_link   = models.TextField(blank=True, null=True)
     resume          = models.FileField(upload_to = "images/resume", blank=True, null=True)
     designation     = models.ForeignKey('Career', on_delete=models.CASCADE, related_name='ApplicationForm_Career', blank=True, null=True,)
+    remarks         = models.TextField(blank=True, null=True)
+    status           = models.BooleanField(default = False)
 
     created_at      = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at      = models.DateTimeField(auto_now=True, blank=True, null=True,)

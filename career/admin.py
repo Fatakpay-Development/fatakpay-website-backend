@@ -1,12 +1,28 @@
 from django.contrib import admin
 from career.models import *
 from django_summernote.admin import SummernoteModelAdmin
+import csv
+from django.http import HttpResponse
 # Register your models here.
 
-@admin.register(ApplicationForm)
-class ApplicationFormAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'contact','linkedin_link','designation', 'created_at', 'updated_at', 'is_deleted')
+class ExportCsvMixin:
+    def export_as_csv(self, request, queryset):
+        meta = self.model._meta
+        field_names = [field.name for field in meta.fields]
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+        writer = csv.writer(response)
+        writer.writerow(field_names)
+        for obj in queryset:
+            row = writer.writerow([getattr(obj, field) for field in field_names])
+        return response
+    export_as_csv.short_description = "Export Selected"
 
+@admin.register(ApplicationForm)
+class ApplicationFormAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ('full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted')
+    actions      = ["export_as_csv"]
+    date_hierarchy = 'created_at'
     def has_delete_permission(self, request, obj=None):
         # Disable delete
         return False
