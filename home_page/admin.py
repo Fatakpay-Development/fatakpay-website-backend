@@ -4,7 +4,7 @@ from home_page.models import *
 
 @admin.register(SignUp)
 class SignUpAdmin(admin.ModelAdmin):
-    list_display        = ("full_name", "email","contact","created_at","updated_at","is_deleted")
+    list_display        = ("full_name", "email","country_code", "contact","created_at","updated_at","is_deleted")
 
     def has_delete_permission(self, request, obj=None):
         # Disable delete

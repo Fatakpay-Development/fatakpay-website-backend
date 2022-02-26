@@ -23,6 +23,7 @@ class Corporate(models.Model):
     business_loc    =   models.CharField(max_length=100, null=True, blank=True)
     employee_no     =   models.IntegerField(null=True, blank=True)
     where_hear      =   models.CharField(max_length=100, choices=WHERE_HEAR_CHOICES, default="Other")
+    country_code    =   models.CharField(max_length=10, blank=True, null=True,)
     contact         =   models.CharField(max_length=15, blank=True, null=True,)
   
     created_at      =   models.DateTimeField(auto_now_add=True, blank=True, null=True,)

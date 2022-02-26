@@ -7,7 +7,7 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(Corporate)
 class CorporateAdmin(admin.ModelAdmin):
-    list_display        = ("full_name","work_email","company_name", "business_loc", "employee_no", "where_hear", "contact", "created_at","updated_at","is_deleted")
+    list_display        = ("full_name","work_email","company_name", "business_loc", "employee_no", "where_hear", "country_code", "contact", "created_at","updated_at","is_deleted")
 
     def has_delete_permission(self, request, obj=None):
         # Disable delete
