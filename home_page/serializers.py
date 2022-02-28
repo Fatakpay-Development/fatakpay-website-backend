@@ -11,9 +11,11 @@ class GetWatchVideoListSerializer(serializers.ModelSerializer):
 class PostSignUpSerializer(serializers.ModelSerializer):
     full_name   = serializers.CharField(required=True)
     email       = serializers.CharField(required=True)
+    country_code= serializers.CharField(required=True)
+
     class Meta:
         model = SignUp
-        fields = ['full_name', 'email','contact']
+        fields = ['full_name', 'email', 'country_code','contact']
 
 class GetTestmonialsListSerializer(serializers.ModelSerializer):
     class Meta:

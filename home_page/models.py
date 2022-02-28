@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class SignUp(models.Model):
     full_name       = models.CharField(max_length=100, blank=True, null=True,)
     email           = models.CharField(max_length=100, blank=True, null=True,)
+    country_code    = models.CharField(max_length=10, blank=True, null=True,)
     contact         = models.CharField(max_length=15, blank=True, null=True,)
 
     created_at      = models.DateTimeField(auto_now_add=True, blank=True, null=True)

@@ -86,9 +86,9 @@ class ApplicationFormAPIView(APIView):
 
         if serializer.is_valid():
             email_id = serializer.validated_data.get('email')
-            Subject = 'here is mail from aniket',
-            Message = 'here is message from aniket',
-            To = [email_id]
+            Subject = 'here is mail from aniket'
+            Message = 'here is message from aniket'
+            To = [email_id,]
             custom_mail(Subject, Message, To)
             serializer.save(status=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

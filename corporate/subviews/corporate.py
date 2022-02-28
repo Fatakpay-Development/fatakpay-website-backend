@@ -19,6 +19,10 @@ class CorporateAPIView(APIView):
             #         'data': serializer.errors},
             #         status = status.HTTP_400_BAD_REQUEST)
             # else:
+                # Subject = 'here is mail from aniket',
+                # Message = 'here is message from aniket',
+                # To = [email_id]
+                # custom_mail(Subject, Message, To)
             #     serializer.save(email=email_id)
             serializer.save()
             return Response({

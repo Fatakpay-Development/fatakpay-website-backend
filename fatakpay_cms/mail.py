@@ -5,9 +5,9 @@ def custom_mail(Subject, Message, To):
     print(Message)
     print(To)
     print("data")
-    # send_mail(
-    #     Subject,
-    #     Message,
-    #     'support@idoot.in',
-    #     To,
-    # )
+    send_mail(
+        Subject,
+        Message,
+        'support@fatakpay.com',
+        To,
+    )

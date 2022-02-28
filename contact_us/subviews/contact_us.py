@@ -7,6 +7,7 @@ from rest_framework import mixins
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from fatakpay_cms.mail import custom_mail
 
 
 
@@ -35,12 +36,16 @@ class ContactUsListAPIView(APIView):
             #         'data': serializer.errors},
             #         status = status.HTTP_400_BAD_REQUEST)
             # else:
+                # Subject = 'here is mail from aniket',
+                # Message = 'here is message from aniket',
+                # To = [email_id]
+                # custom_mail(Subject, Message, To)
             #     serializer.save(email=email_id)
             serializer.save()
             return Response({
                 'success': True,
                 'status_code': status.HTTP_201_CREATED,
-                'message': 'Signup Data saved SuccessFully',
+                'message': 'ContactUs Data saved SuccessFully',
                 'data': serializer.data},
                 status = status.HTTP_201_CREATED) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
