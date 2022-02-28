@@ -1,28 +1,41 @@
 from django.contrib import admin
 from career.models import *
 from django_summernote.admin import SummernoteModelAdmin
+from import_export.admin import ImportExportModelAdmin
 import csv
 from django.http import HttpResponse
+from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
+import datetime
 # Register your models here.
 
-class ExportCsvMixin:
-    def export_as_csv(self, request, queryset):
-        meta = self.model._meta
-        field_names = [field.name for field in meta.fields]
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
-        writer = csv.writer(response)
-        writer.writerow(field_names)
-        for obj in queryset:
-            row = writer.writerow([getattr(obj, field) for field in field_names])
-        return response
-    export_as_csv.short_description = "Export Selected"
+# class ExportCsvMixin:
+#     def export_as_csv(self, request, queryset):
+#         meta = self.model._meta
+#         field_names = [field.name for field in meta.fields]
+#         response = HttpResponse(content_type='text/csv')
+#         response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+#         writer = csv.writer(response)
+#         writer.writerow(field_names)
+#         for obj in queryset:
+#             row = writer.writerow([getattr(obj, field) for field in field_names])
+#         return response
+#     export_as_csv.short_description = "Export Selected"
+
+
 
 @admin.register(ApplicationForm)
-class ApplicationFormAdmin(admin.ModelAdmin, ExportCsvMixin):
-    list_display = ('full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted')
-    actions      = ["export_as_csv"]
-    date_hierarchy = 'created_at'
+class ApplicationFormAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ['full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted']
+    list_filter  = ['designation','status', ('created_at', DateRangeFilter),]
+    # actions      = ["export_as_csv"]
+    # date_hierarchy = 'created_at'
+    
+    def get_rangefilter_created_at_default(self, request):
+        return (datetime.date.today, datetime.date.today)
+
+    def get_rangefilter_created_at_title(self, request, field_path):
+        return 'save from dates you would like'
+
     def has_delete_permission(self, request, obj=None):
         # Disable delete
         return False

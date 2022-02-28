@@ -1,10 +1,23 @@
 from django.contrib import admin
 from home_page.models import *
+from import_export.admin import ImportExportModelAdmin
+import csv
+from django.http import HttpResponse
+from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
+import datetime
 # Register your models here.
 
 @admin.register(SignUp)
-class SignUpAdmin(admin.ModelAdmin):
-    list_display        = ("full_name", "email","country_code", "contact","created_at","updated_at","is_deleted")
+class SignUpAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ("full_name", "email","contact","created_at","updated_at","is_deleted")
+    list_filter  = ['full_name','email', ('created_at', DateRangeFilter),]
+    actions      = ["export_as_csv"]
+    
+    def get_rangefilter_created_at_default(self, request):
+        return (datetime.date.today, datetime.date.today)
+
+    def get_rangefilter_created_at_title(self, request, field_path):
+        return 'save from dates you would like'
 
     def has_delete_permission(self, request, obj=None):
         # Disable delete

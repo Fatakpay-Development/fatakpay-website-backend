@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'import_export',
+    'rangefilter',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -161,11 +162,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+# TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
