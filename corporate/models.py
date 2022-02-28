@@ -35,3 +35,16 @@ class Corporate(models.Model):
     class Meta:
         db_table = "Corporate"
         verbose_name_plural = 'Corporate'
+
+
+class CountryDialCode(models.Model):
+    name        =   models.CharField(max_length=100, null=True, blank=True)
+    dial_code   =   models.CharField(max_length=100, null=True, blank=True)
+    code        =   models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self): 
+        return str(self.name)
+    
+    class Meta:
+        db_table = "CountryDialCode"
+        verbose_name_plural = 'CountryDialCode'

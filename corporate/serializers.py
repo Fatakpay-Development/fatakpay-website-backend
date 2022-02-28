@@ -11,3 +11,8 @@ class PostCorporateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Corporate
         fields = ["full_name","work_email","company_name",'business_loc',"employee_no","where_hear","contact"]
+
+class GetCountryDialCodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CountryDialCode
+        fields = ["name","dial_code","code"]
