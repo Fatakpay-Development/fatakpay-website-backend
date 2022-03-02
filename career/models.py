@@ -41,8 +41,12 @@ class ApplicationForm(models.Model):
     updated_at      = models.DateTimeField(auto_now=True, blank=True, null=True,)
     is_deleted      = models.BooleanField(default = False)
 
+    @property
+    def s3_url(self):
+        return self.resume.url
+
     def __str__(self): 
-        return str(self.full_name)
+        return f'{self.resume.url} - {self.full_name}'
         
     class Meta:
         db_table = "ApplicationForm"

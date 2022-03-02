@@ -14,7 +14,7 @@ import datetime
 @admin.register(Corporate)
 class CorporateAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ("full_name","work_email","company_name", "business_loc", "employee_no", "where_hear", "contact", "created_at","updated_at","is_deleted")
-    list_filter  = ['full_name','work_email', ('created_at', DateRangeFilter),]
+    list_filter  = ['full_name','work_email','company_name','business_loc', ('created_at', DateRangeFilter),]
     
     def get_rangefilter_created_at_default(self, request):
         return (datetime.date.today, datetime.date.today)

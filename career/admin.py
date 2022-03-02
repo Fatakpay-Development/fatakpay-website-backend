@@ -2,10 +2,13 @@ from django.contrib import admin
 from career.models import *
 from django_summernote.admin import SummernoteModelAdmin
 from import_export.admin import ImportExportModelAdmin
+from django.utils.html import format_html, urlencode
 import csv
 from django.http import HttpResponse
 from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
 import datetime
+from import_export.resources import ModelResource
+from import_export.fields import Field
 # Register your models here.
 
 # class ExportCsvMixin:
@@ -21,10 +24,20 @@ import datetime
 #         return response
 #     export_as_csv.short_description = "Export Selected"
 
-
+class ApplicationFormResource(ModelResource):
+    resume_link = Field()
+    class Meta:
+        model = ApplicationForm
+        export_order = ('id','full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted','resume_link')
+    
+    def dehydrate_resume_link(self, obj):
+        url = obj.resume.url
+        print(url)
+        return url
 
 @admin.register(ApplicationForm)
 class ApplicationFormAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = ApplicationFormResource
     list_display = ['full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted']
     list_filter  = ['designation','status', ('created_at', DateRangeFilter),]
     # actions      = ["export_as_csv"]
