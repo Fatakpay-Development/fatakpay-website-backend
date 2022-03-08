@@ -9,6 +9,7 @@ from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from fatakpay_cms.mail import custom_mail
 
 class LargeResultsSetPagination(PageNumberPagination):
     page_size           = 1
@@ -34,7 +35,7 @@ class SignUpListAPIView(APIView):
     def post(self, request, format=None):
         serializer = PostSignUpSerializer(data=request.data)
         if serializer.is_valid():
-            # email_id = serializer.validated_data.get('email')
+            email_id = serializer.validated_data.get('email')
             # if SignUp.objects.filter(email = email_id).exists():
             #     return Response({
             #         'success': False,
@@ -43,12 +44,13 @@ class SignUpListAPIView(APIView):
             #         'data': serializer.errors},
             #         status = status.HTTP_400_BAD_REQUEST)
             # else:
-                # Subject = 'here is mail from aniket',
-                # Message = 'here is message from aniket',
-                # To = [email_id]
-                # custom_mail(Subject, Message, To)
-            #     serializer.save(email=email_id)
-            serializer.save()
+            Subject = "Welcome to FatakPay! We’re so glad you’re here"
+            html_content = "<p>Thanks for joining the FatakPay early access list! <br>We have been working really hard over the past three months developing the best FinTech platform which will enable the masses to access quick and easy credit. <br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us get the word out, get feedback, and continue making FatakPay better. <br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p>"
+            Message = ""
+            To = [email_id,]
+            custom_mail(Subject, Message, To, html_content)
+            serializer.save(email=email_id)
+            # serializer.save()
             return Response({
                 'success': True,
                 'status_code': status.HTTP_201_CREATED,

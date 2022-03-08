@@ -4,13 +4,14 @@ from corporate.models import *
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from fatakpay_cms.mail import custom_mail
 
 class CorporateAPIView(APIView):
 
     def post(self, request, format=None):
         serializer = PostCorporateSerializer(data=request.data)
         if serializer.is_valid():
-            # email_id = serializer.validated_data.get('work_email')
+            email_id = serializer.validated_data.get('work_email')
             # if Corporate.objects.filter(work_email = email_id).exists():
             #     return Response({
             #         'success': False,
@@ -19,12 +20,13 @@ class CorporateAPIView(APIView):
             #         'data': serializer.errors},
             #         status = status.HTTP_400_BAD_REQUEST)
             # else:
-                # Subject = 'here is mail from aniket',
-                # Message = 'here is message from aniket',
-                # To = [email_id]
-                # custom_mail(Subject, Message, To)
-            #     serializer.save(email=email_id)
-            serializer.save()
+            Subject = "Welcome to FatakPay! We’re so glad you’re here"
+            html_content = "<p>Thanks for joining the FatakPay list and showing interest in a demo! <br>We have been working really hard over the past three months developing the best FinTech platform which will enable the masses to access quick and easy credit. <br><br>You've been added to our VIP list and will now be among the first to hear from us when we launch.<br><br>Talk to you soon,<br>Team FatakPay</p>"
+            Message = ""
+            To = [email_id,]
+            custom_mail(Subject, Message, To, html_content)
+            serializer.save(work_email=email_id)
+            # serializer.save()
             return Response({
                 'success': True,
                 'status_code': status.HTTP_201_CREATED,

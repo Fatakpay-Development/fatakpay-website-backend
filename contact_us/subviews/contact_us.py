@@ -27,7 +27,7 @@ class ContactUsListAPIView(APIView):
     def post(self, request, format=None):
         serializer = PostContactUsSerializer(data=request.data)
         if serializer.is_valid():
-            # email_id = serializer.validated_data.get('email')
+            email_id = serializer.validated_data.get('email')
             # if ContactUs.objects.filter(email = email_id).exists():
             #     return Response({
             #         'success': False,
@@ -36,12 +36,13 @@ class ContactUsListAPIView(APIView):
             #         'data': serializer.errors},
             #         status = status.HTTP_400_BAD_REQUEST)
             # else:
-                # Subject = 'here is mail from aniket',
-                # Message = 'here is message from aniket',
-                # To = [email_id]
-                # custom_mail(Subject, Message, To)
-            #     serializer.save(email=email_id)
-            serializer.save()
+            Subject = "Thank you for getting in touch!"
+            html_content = '<p>We have received your message and would like to thank you for writing to us. One of our colleagues will get back in touch with you soon! <br>If your inquiry is urgent, please call us on +91 8976226669 to talk to one of our staff members. <br> <br> Talk to you soon, <br> Team FatakPay</p>'
+            Message = ""
+            To = [email_id,]
+            custom_mail(Subject, Message, To, html_content)
+            serializer.save(email=email_id)
+            # serializer.save()
             return Response({
                 'success': True,
                 'status_code': status.HTTP_201_CREATED,
