@@ -35,7 +35,10 @@ CORS_ORIGIN_WHITELIST = (
         'https://devwebsite.fatakpay.com',
         'http://devwebsite.fatakpay.com',
         'https://fatakpay.com',
-        'http://fatakpay.com'
+        'http://fatakpay.com',
+        'https://www.fatakpay.com',
+        'http://www.fatakpay.com',
+
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://apiwebsite.fatakpay.com", "https://apiwebsite.fatakpay.com"]
