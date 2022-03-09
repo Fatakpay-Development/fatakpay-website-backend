@@ -88,7 +88,7 @@ class ApplicationFormAPIView(APIView):
             email_id = serializer.validated_data.get('email')
             customer_name = serializer.validated_data.get('full_name')
             Subject = "Your application has been sent!"
-            html_content = "<p>Hello {customer_name}, <br><br>We have received your application and would like to thank you for showing interest in a career with<br> FatakPay. One of our colleagues will get back in touch with you soon! <br><br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
+            html_content = "<p>Hello {customer_name}, <br><br>We have received your application and would like to thank you for showing interest in a career with<br> FatakPay. One of our colleagues will get back in touch with you soon! <br><br><br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
             Message = ""
             To = [email_id,]
             custom_mail(Subject, Message, To, html_content)
