@@ -8,9 +8,11 @@ class Faq(models.Model):
                     ('U', 'user'),
                     ('E', 'employee'),
                     ('A', 'app'),
-
+                    ('Fatakpay Card', 'Fatakpay Card'),
+                    ('Payments', 'Payments'),
+                    ('Get Started', 'Get Started')
                 ]
-    user_type   =   models.CharField(max_length=4, choices=USER_CHOICES, default="user")
+    user_type   =   models.CharField(max_length=255, choices=USER_CHOICES, default="user")
 
     question        =   models.TextField(null=True, blank=True)
     answer          =   models.TextField(null=True, blank=True)
