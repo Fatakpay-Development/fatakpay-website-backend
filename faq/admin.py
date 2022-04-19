@@ -17,3 +17,9 @@ class FaqAdmin(admin.ModelAdmin):
 
         obj.created_by  = platform_user
         obj.save()
+
+
+@admin.register(FaqCategory)
+class FaqCategoryAdmin(admin.ModelAdmin):
+    list_display        = ("category","created_at","updated_at","is_deleted","created_by")
+    readonly_fields     = ('created_by',)
