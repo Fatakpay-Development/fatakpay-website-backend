@@ -36,3 +36,24 @@ class FaqListAPIView(APIView):
         response['message'] = responsedata
         response['data'] = serializers.data
         return Response(response)
+
+
+
+
+
+class FaqCategoryListAPIView(APIView):
+
+    def get(self, request, format=None):
+        response = {}
+        responsedata = []
+
+        data_qs = FaqCategory.objects.filter(is_deleted=False)
+
+        serializers = GetFaqCategoryListSerializer(data_qs, many=True)
+
+        responsedata.append('Faq Category List Fetch SuccessFully.')
+        response['success'] = True
+        response['status'] = status.HTTP_200_OK
+        response['message'] = responsedata
+        response['data'] = serializers.data
+        return Response(response)

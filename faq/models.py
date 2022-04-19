@@ -15,7 +15,7 @@ class FaqCategory(models.Model):
     created_by      =   models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self): 
-        return str(self.question)
+        return str(self.category)
    
     class Meta:
         db_table = 'faq_category'
