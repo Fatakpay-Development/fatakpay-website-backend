@@ -34,6 +34,7 @@ class Faq(models.Model):
                     ('Get Started', 'Get Started')
                 ]
     user_type   =   models.CharField(max_length=255, choices=USER_CHOICES, default="user")
+    category    =   models.ForeignKey(FaqCategory, on_delete=models.CASCADE, blank=True, null=True)
 
     question        =   models.TextField(null=True, blank=True)
     answer          =   models.TextField(null=True, blank=True)
