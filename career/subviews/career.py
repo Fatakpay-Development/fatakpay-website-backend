@@ -10,7 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from utils import custom_exceptions as ce
 import logging
 from rest_framework.views import APIView
-from fatakpay_cms.mail import custom_mail
+# from fatakpay_cms.mail import custom_mail
 logger = logging.getLogger('career')
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -85,13 +85,13 @@ class ApplicationFormAPIView(APIView):
             request.data['designation'] = designation_obj.id
 
         if serializer.is_valid():
-            email_id = serializer.validated_data.get('email')
-            customer_name = serializer.validated_data.get('full_name')
-            Subject = "Your application has been sent!"
-            html_content = "<p>Hello {customer_name}, <br><br>We have received your application and would like to thank you for showing interest in a career with<br> FatakPay. One of our colleagues will get back in touch with you soon! <br><br><br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
-            Message = ""
-            To = [email_id,]
-            custom_mail(Subject, Message, To, html_content)
+            # email_id = serializer.validated_data.get('email')
+            # customer_name = serializer.validated_data.get('full_name')
+            # Subject = "Your application has been sent!"
+            # html_content = "<p>Hello {customer_name}, <br><br>We have received your application and would like to thank you for showing interest in a career with<br> FatakPay. One of our colleagues will get back in touch with you soon! <br><br><br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
+            # Message = ""
+            # To = [email_id,]
+            # custom_mail(Subject, Message, To, html_content)
             serializer.save(status=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
