@@ -10,16 +10,16 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='career',
-            name='employee_type',
-            field=models.CharField(blank=True, max_length=250, null=True),
-        ),
-        migrations.AddField(
-            model_name='career',
-            name='expect_from_you',
-            field=models.TextField(blank=True, null=True),
-        ),
+        # migrations.AddField(
+        #     model_name='career',
+        #     name='employee_type',
+        #     field=models.CharField(blank=True, max_length=250, null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='career',
+        #     name='expect_from_you',
+        #     field=models.TextField(blank=True, null=True),
+        # ),
         migrations.AddField(
             model_name='career',
             name='ideal_candidate',
