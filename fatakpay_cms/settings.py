@@ -30,18 +30,17 @@ ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
         'http://localhost:4200',
+        'http://localhost:4201',
         'http://apiwebsite.fatakpay.com',
         'https://apiwebsite.fatakpay.com',
         'https://devwebsite.fatakpay.com',
         'http://devwebsite.fatakpay.com',
-        'https://fatakpay.com',
-        'http://fatakpay.com',
-        'https://www.fatakpay.com',
-        'http://www.fatakpay.com',
+        'https://devapiwebsite.fatakpay.com',
+        'http://devapiwebsite.fatakpay.com',
 
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://apiwebsite.fatakpay.com", "https://apiwebsite.fatakpay.com"]
+CSRF_TRUSTED_ORIGINS = ["http://devapiwebsite.fatakpay.com", "https://devapiwebsite.fatakpay.com"]
 
 # Application definition
 
@@ -210,12 +209,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
-AWS_REGION = 'ap-south-1'
-AWS_S3_HOST = 's3.ap-south-1.amazonaws.com'
-AWS_S3_REGION_NAME = 'ap-south-1' #change to your region
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_SES_REGION_NAME = 'ap-south-1'
-AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
-AWS_ACCESS_KEY_ID = 'AKIA6RDLEAS7DBBE2RXC'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'fpay-website'
+
+try:
+        from fatakpay_cms.local_settings import *
+except ImportError:
+        pass
+
+
