@@ -43,6 +43,37 @@ class FaqListAPIView(APIView):
 
 
 
+class ResourcesListAPIView(APIView):
+
+    def get(self, request, format=None):
+        response = {}
+        responsedata = []
+
+        data = Resources.objects.filter(is_deleted=False)
+
+        # if request.query_params.get('user_type'):
+        #     data = data.filter(user_type=request.query_params.get('user_type'))
+
+        # if request.query_params.get('is_important'):
+        #     data = data.filter(is_important=True)
+
+        # if request.query_params.get('category_id'):
+        #     data = data.filter(category__pk=request.query_params.get('category_id'))
+
+        data = data.order_by('priority')
+
+        serializers = GetResourcesSerializer(data, many=True)
+
+        responsedata.append('Resources Application Video List Fetch SuccessFully.')
+        response['success'] = True
+        response['status'] = status.HTTP_200_OK
+        response['message'] = responsedata
+        response['data'] = serializers.data
+        return Response(response)
+
+
+
+
 
 class FaqCategoryListAPIView(APIView):
 
