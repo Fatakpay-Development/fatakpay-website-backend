@@ -36,20 +36,20 @@ class SignUpListAPIView(APIView):
         serializer = PostSignUpSerializer(data=request.data)
         if serializer.is_valid():
             email_id = serializer.validated_data.get('email')
-            # customer_name = serializer.validated_data.get('full_name')
-                # if SignUp.objects.filter(email = email_id).exists():
-                #     return Response({
-                #         'success': False,
-                #         'status_code': status.HTTP_400_BAD_REQUEST,
-                #         'message': 'Email Is All Ready Exist',
-                #         'data': serializer.errors},
-                #         status = status.HTTP_400_BAD_REQUEST)
-                # else:
-            # Subject = "Welcome to FatakPay! We’re so glad you’re here"
-            # html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay early access list! <br><br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br><br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us<br> get the word out, get feedback, and continue making FatakPay better. <br><br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get<br> a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
-            # Message = ""
-            # To = [email_id,]
-            # custom_mail(Subject, Message, To, html_content)
+            customer_name = serializer.validated_data.get('full_name')
+            # if SignUp.objects.filter(email = email_id).exists():
+            #     return Response({
+            #         'success': False,
+            #         'status_code': status.HTTP_400_BAD_REQUEST,
+            #         'message': 'Email Is All Ready Exist',
+            #         'data': serializer.errors},
+            #         status = status.HTTP_400_BAD_REQUEST)
+            # else:
+            Subject = "Welcome to FatakPay! We’re so glad you’re here"
+            html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay early access list! <br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us<br> get the word out, get feedback, and continue making FatakPay better. <br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get<br> a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p> <a href='https://fatakpay.com/'>Unsubscribe</a>".format(customer_name = customer_name )
+            Message = ""
+            To = [email_id,]
+            custom_mail(Subject, Message, To, html_content)
             serializer.save(email=email_id)
             # serializer.save()
             return Response({
