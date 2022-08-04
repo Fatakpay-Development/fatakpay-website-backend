@@ -21,7 +21,7 @@ class SignUp(models.Model):
 
 
 class WatchVideo(models.Model):
-    video           = models.TextField(blank=True, null=True,)
+    video           = models.FileField(blank=True, null=True,)
 
     created_at      = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at      = models.DateTimeField(auto_now=True, blank=True, null=True,)
