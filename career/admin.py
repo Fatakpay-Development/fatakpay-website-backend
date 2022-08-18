@@ -54,7 +54,7 @@ class ApplicationFormAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         return False
 
 @admin.register(Career)
-class CareerSummer(SummernoteModelAdmin):
+class CareerSummer(ImportExportModelAdmin, SummernoteModelAdmin):
     list_display = ('designation', 'priority', 'location', 'report_to','employee_type', 'created_at', 'updated_at', 'is_deleted', 'created_by')
     list_filter = ("location","report_to","employee_type")
     search_fields = ['location', 'report_to']
