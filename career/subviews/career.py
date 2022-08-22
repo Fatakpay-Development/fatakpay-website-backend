@@ -92,7 +92,9 @@ class ApplicationFormAPIView(APIView):
             Message = ""
             To = [email_id,]
             custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
-            # To = ['jamir@fatakpay.com',]
+            Hr_to = ['jamir@fatakpay.com',]
+            Hr_html_content = "<p>Hello {Hr_to}, <br><br>You received {customer_name}'s application and {customer_name} showing interest in a career with<br> FatakPay.</p>".format(customer_name = customer_name )
+            custom_mail(Subject, Message, Hr_to, Hr_html_content, 'help@fatakpay.com')
             serializer.save(status=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
