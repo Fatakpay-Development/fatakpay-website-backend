@@ -22,7 +22,7 @@ class CorporateAPIView(APIView):
                 #         status = status.HTTP_400_BAD_REQUEST)
                 # else:
             Subject = "Welcome to FatakPay! We’re so glad you’re here"
-            html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay list and showing interest in a demo! <br><br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br><br><br>You've been added to our VIP list and will now be among the first to hear from us when we launch.<br><br><br>Talk to you soon,<br>Team FatakPay</p>".format(customer_name = customer_name )
+            html_content = "<p>Hi, <br><br>{customer_name}has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.<br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
             Message = ""
             To = ['abhishek@fatakpay.com',]
             custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')

@@ -85,6 +85,12 @@ class ReferCompanyAPIView(APIView):
             Message = ""
             To = ['abhishek@fatakpay.com',]
             custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+
+            # mail to reefer
+            # reeferSubject = "Welcome to FatakPay! We’re so glad you’re here"
+            # reefer_html_content = "<p>Hi, <br><br>Thank you for showing interest and referring your HR manager/employer to us. <br>One of our team members will call him/her shortly.<br>If you have any further questions or concerns, please let us know. we&#39;re here to help!<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+            # reeferTo = [manager_email,]
+            # custom_mail(reeferSubject, Message, reeferTo, reefer_html_content, 'help@fatakpay.com')
             serializer.save()
             return Response({
                 'success': True,
