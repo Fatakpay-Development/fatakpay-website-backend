@@ -1,3 +1,5 @@
+from statistics import mode
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -56,3 +58,18 @@ class Testmonials(models.Model):
     class Meta:
         db_table = "Testmonials"
         verbose_name_plural = 'Testmonials'
+
+class ReferCompany(models.Model):
+    manager_name = models.CharField(max_length=100, blank=False, null=False)
+    manager_email = models.CharField(max_length=100, blank=False, null=False)
+    company_name = models.CharField(max_length=100, blank=False, null=False)
+    number_of_employees = models.IntegerField(max_length=100, blank=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, blank=False, null=False)
+    is_deleted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.manager_name)
+    
+    class meta:
+        db_table = "ReferCompany"
+        verbose_name_plural = "ReferCompany"
