@@ -72,3 +72,24 @@ class TestmonialsListAPIView(APIView):
                         'message': 'Testmonials List Fetch SuccessFully',
                         'data': serializer.data},
                         status = status.HTTP_200_OK)
+
+class ReferCompanyAPIView(APIView):
+    def post(self, request, format=None):
+        serializer = PostReferCompanySerializer(data= request.data)
+        if serializer.is_valid():
+            manager_email = serializer.validated_data.get('manager_email')
+            company_name = serializer.validated_data.get('company_name')
+
+            Subject = "Refer a company"
+            html_content = "<p>Hi, <br><br>{company_name} has shown interest in a demo of FatakPay and has referred his/her HR manager. <br>Kindly call and inquire about his/her requirements.<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+            Message = ""
+            To = ['abhishek@fatakpay.com',]
+            custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+            serializer.save()
+            return Response({
+                'success': True,
+                'status_code': status.HTTP_201_CREATED,
+                'message': 'Refer Company Data saved SuccessFully',
+                'data': serializer.data},
+                status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)

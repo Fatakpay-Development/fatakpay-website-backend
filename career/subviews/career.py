@@ -87,14 +87,16 @@ class ApplicationFormAPIView(APIView):
         if serializer.is_valid():
             email_id = serializer.validated_data.get('email')
             customer_name = serializer.validated_data.get('full_name')
+            designation = serializer.validated_data.get('designation')
             Subject = "Your application has been sent!"
             html_content = "<p>Hello {customer_name}, <br><br>We have received your application and would like to thank you for showing interest in a career with<br> FatakPay. One of our colleagues will get back in touch with you soon! <br><br><br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
             Message = ""
             To = [email_id,]
             custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+            Hr_Subject = "CV received."
             Hr_to = ['jamir@fatakpay.com',]
-            Hr_html_content = "<p>Hello {Hr_to}, <br><br>You received {customer_name}'s application and {customer_name} showing interest in a career with<br> FatakPay.</p>".format(customer_name = customer_name )
-            custom_mail(Subject, Message, Hr_to, Hr_html_content, 'help@fatakpay.com')
+            Hr_html_content = "<p>Hello HR, <br><br>You have received an application for {designation} from {customer_name}.".format(customer_name = customer_name, designation = designation )
+            custom_mail(Hr_Subject, Message, Hr_to, Hr_html_content, 'help@fatakpay.com')
             serializer.save(status=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
