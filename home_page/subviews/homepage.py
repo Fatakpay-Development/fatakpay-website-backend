@@ -79,23 +79,31 @@ class ReferCompanyAPIView(APIView):
         if serializer.is_valid():
             manager_email = serializer.validated_data.get('manager_email')
             company_name = serializer.validated_data.get('company_name')
+            if SignUp.objects.filter(email = manager_email).exists():
+                return Response({
+                    'success': False,
+                    'status_code': status.HTTP_400_BAD_REQUEST,
+                    'message': manager_email + ' is already exists.',
+                    'data': serializer.errors},
+                    status = status.HTTP_400_BAD_REQUEST)
+            else:
 
-            Subject = "Refer a company"
-            html_content = "<p>Hi, <br><br>{company_name} has shown interest in a demo of FatakPay and has referred his/her HR manager. <br>Kindly call and inquire about his/her requirements.<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
-            Message = ""
-            To = ['abhishek@fatakpay.com',]
-            custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+                Subject = "Refer a company"
+                html_content = "<p>Hi, <br><br>{company_name} has shown interest in a demo of FatakPay and has referred his/her HR manager. <br>Kindly call and inquire about his/her requirements.<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+                Message = ""
+                To = ['abhishek@fatakpay.com',]
+                custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
 
-            # mail to reefer
-            # reeferSubject = "Welcome to FatakPay! We’re so glad you’re here"
-            # reefer_html_content = "<p>Hi, <br><br>Thank you for showing interest and referring your HR manager/employer to us. <br>One of our team members will call him/her shortly.<br>If you have any further questions or concerns, please let us know. we&#39;re here to help!<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
-            # reeferTo = [manager_email,]
-            # custom_mail(reeferSubject, Message, reeferTo, reefer_html_content, 'help@fatakpay.com')
-            serializer.save()
-            return Response({
-                'success': True,
-                'status_code': status.HTTP_201_CREATED,
-                'message': 'Refer Company Data saved SuccessFully',
-                'data': serializer.data},
-                status = status.HTTP_201_CREATED)
+                # mail to reefer
+                # reeferSubject = "Welcome to FatakPay! We’re so glad you’re here"
+                # reefer_html_content = "<p>Hi, <br><br>Thank you for showing interest and referring your HR manager/employer to us. <br>One of our team members will call him/her shortly.<br>If you have any further questions or concerns, please let us know. we&#39;re here to help!<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+                # reeferTo = [manager_email,]
+                # custom_mail(reeferSubject, Message, reeferTo, reefer_html_content, 'help@fatakpay.com')
+                serializer.save()
+                return Response({
+                    'success': True,
+                    'status_code': status.HTTP_201_CREATED,
+                    'message': 'Refer Company Data saved SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
