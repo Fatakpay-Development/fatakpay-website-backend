@@ -38,7 +38,7 @@ class ApplicationFormResource(ModelResource):
 @admin.register(ApplicationForm)
 class ApplicationFormAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = ApplicationFormResource
-    list_display = ['full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'created_at', 'updated_at', 'is_deleted']
+    list_display = ['full_name', 'email', 'contact','linkedin_link','designation','remarks', 'status', 'resume', 'created_at', 'updated_at', 'is_deleted']
     list_filter  = ['designation','status', ('created_at', DateRangeFilter),]
     # actions      = ["export_as_csv"]
     # date_hierarchy = 'created_at'
@@ -61,6 +61,12 @@ class CareerSummer(ImportExportModelAdmin, SummernoteModelAdmin):
     summernote_fields = ('expect_from_you',"ideal_candidate","love_working_fpay","perks_benefits")
     readonly_fields     = ('created_by',)
     
+    def get_rangefilter_created_at_default(self, request):
+        return (datetime.date.today, datetime.date.today)
+
+    def get_rangefilter_created_at_title(self, request, field_path):
+        return 'save from dates you would like'
+        
     def has_delete_permission(self, request, obj=None):
         # Disable delete
         return False
