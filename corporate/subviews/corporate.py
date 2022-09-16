@@ -24,7 +24,7 @@ class CorporateAPIView(APIView):
                 Subject = "Welcome to FatakPay! We’re so glad you’re here"
                 html_content = "<p>Hi, <br><br>{customer_name}has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.<br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
                 Message = ""
-                To = ['abhishek@fatakpay.com',]
+                To = ['sales@fatakpay.com',]
                 custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
                 serializer.save(work_email=email_id)
                 # serializer.save()

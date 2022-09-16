@@ -48,7 +48,7 @@ class SignUpListAPIView(APIView):
                 Subject = "Welcome to FatakPay! We’re so glad you’re here"
                 html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay early access list! <br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us<br> get the word out, get feedback, and continue making FatakPay better. <br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get<br> a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p> <a href='https://fatakpay.com/'>Unsubscribe</a>".format(customer_name = customer_name )
                 Message = ""
-                To = ['abhishek@fatakpay.com',]
+                To = ['sales@fatakpay.com',]
                 custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
                 serializer.save(email=email_id)
                 # serializer.save()
@@ -91,7 +91,7 @@ class ReferCompanyAPIView(APIView):
                 Subject = "Refer a company"
                 html_content = "<p>Hi, <br><br>{company_name} has shown interest in a demo of FatakPay and has referred his/her HR manager. <br>Kindly call and inquire about his/her requirements.<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
                 Message = ""
-                To = ['abhishek@fatakpay.com',]
+                To = ['sales@fatakpay.com',]
                 custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
 
                 # mail to reefer
