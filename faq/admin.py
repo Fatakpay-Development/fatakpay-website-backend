@@ -23,3 +23,8 @@ class FaqAdmin(admin.ModelAdmin):
 class FaqCategoryAdmin(admin.ModelAdmin):
     list_display        = ("category","created_at","updated_at","is_deleted","created_by")
     readonly_fields     = ('created_by',)
+
+@admin.register(Resources)
+class ResourcesAdmin(admin.ModelAdmin):
+    list_display        = ("video","priority","created_at","is_deleted", "created_by")
+    readonly_fields     = ('created_by',)

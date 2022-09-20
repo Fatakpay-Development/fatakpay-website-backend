@@ -9,7 +9,7 @@ from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
-# from fatakpay_cms.mail import custom_mail
+from fatakpay_cms.mail import custom_mail
 
 class LargeResultsSetPagination(PageNumberPagination):
     page_size           = 1
@@ -36,28 +36,28 @@ class SignUpListAPIView(APIView):
         serializer = PostSignUpSerializer(data=request.data)
         if serializer.is_valid():
             email_id = serializer.validated_data.get('email')
-            # customer_name = serializer.validated_data.get('full_name')
-                # if SignUp.objects.filter(email = email_id).exists():
-                #     return Response({
-                #         'success': False,
-                #         'status_code': status.HTTP_400_BAD_REQUEST,
-                #         'message': 'Email Is All Ready Exist',
-                #         'data': serializer.errors},
-                #         status = status.HTTP_400_BAD_REQUEST)
-                # else:
-            # Subject = "Welcome to FatakPay! We’re so glad you’re here"
-            # html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay early access list! <br><br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br><br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us<br> get the word out, get feedback, and continue making FatakPay better. <br><br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get<br> a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
-            # Message = ""
-            # To = [email_id,]
-            # custom_mail(Subject, Message, To, html_content)
-            serializer.save(email=email_id)
-            # serializer.save()
-            return Response({
-                'success': True,
-                'status_code': status.HTTP_201_CREATED,
-                'message': 'Signup Data saved SuccessFully',
-                'data': serializer.data},
-                status = status.HTTP_201_CREATED) 
+            customer_name = serializer.validated_data.get('full_name')
+            if SignUp.objects.filter(email = email_id).exists():
+                return Response({
+                    'success': False,
+                    'status_code': status.HTTP_400_BAD_REQUEST,
+                    'message': email_id + ' is already registered with us.',
+                    'data': serializer.errors},
+                    status = status.HTTP_400_BAD_REQUEST)
+            else:
+                Subject = "Welcome to FatakPay! We’re so glad you’re here"
+                html_content = "<p>Hello {customer_name}, <br><br>Thanks for joining the FatakPay early access list! <br>We have been working really hard over the past three months developing the best FinTech platform<br> which will enable the masses to access quick and easy credit. <br>That's where you come in. If you have a minute, we'd appreciate a follow on LinkedIn! This helps us<br> get the word out, get feedback, and continue making FatakPay better. <br><br><strong>What's Next?</strong><br>When your invite is ready, we'll send you an email and SMS with a link to get started. Soon you'll get<br> a chance to try all the new features we've been building for FatakPay. <br><br><br>Regards,<br>Team FatakPay</p> <a href='https://fatakpay.com/'>Unsubscribe</a>".format(customer_name = customer_name )
+                Message = ""
+                To = ['sales@fatakpay.com',]
+                custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+                serializer.save(email=email_id)
+                # serializer.save()
+                return Response({
+                    'success': True,
+                    'status_code': status.HTTP_201_CREATED,
+                    'message': 'Signup Data saved SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_201_CREATED) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -72,3 +72,38 @@ class TestmonialsListAPIView(APIView):
                         'message': 'Testmonials List Fetch SuccessFully',
                         'data': serializer.data},
                         status = status.HTTP_200_OK)
+
+class ReferCompanyAPIView(APIView):
+    def post(self, request, format=None):
+        serializer = PostReferCompanySerializer(data= request.data)
+        if serializer.is_valid():
+            manager_email = serializer.validated_data.get('manager_email')
+            company_name = serializer.validated_data.get('company_name')
+            if SignUp.objects.filter(email = manager_email).exists():
+                return Response({
+                    'success': False,
+                    'status_code': status.HTTP_400_BAD_REQUEST,
+                    'message': manager_email + ' is already registered with us.',
+                    'data': serializer.errors},
+                    status = status.HTTP_400_BAD_REQUEST)
+            else:
+
+                Subject = "Refer a company"
+                html_content = "<p>Hi, <br><br>{company_name} has shown interest in a demo of FatakPay and has referred his/her HR manager. <br>Kindly call and inquire about his/her requirements.<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+                Message = ""
+                To = ['sales@fatakpay.com',]
+                custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+
+                # mail to reefer
+                # reeferSubject = "Welcome to FatakPay! We’re so glad you’re here"
+                # reefer_html_content = "<p>Hi, <br><br>Thank you for showing interest and referring your HR manager/employer to us. <br>One of our team members will call him/her shortly.<br>If you have any further questions or concerns, please let us know. we&#39;re here to help!<br><br><br>Regards,<br>Team FatakPay</p>".format(company_name = company_name )
+                # reeferTo = [manager_email,]
+                # custom_mail(reeferSubject, Message, reeferTo, reefer_html_content, 'help@fatakpay.com')
+                serializer.save()
+                return Response({
+                    'success': True,
+                    'status_code': status.HTTP_201_CREATED,
+                    'message': 'Refer Company Data saved SuccessFully',
+                    'data': serializer.data},
+                    status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)

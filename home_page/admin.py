@@ -56,3 +56,17 @@ class TestmonialsAdmin(admin.ModelAdmin):
         obj.created_by  = platform_user
         obj.save()
 
+@admin.register(ReferCompany)
+class ReferCompanyAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'manager_name', 'manager_email', 'company_name', 'number_of_employees', 'is_deleted', 'created_at')
+    list_filter = ['manager_name', 'manager_email', 'company_name', ('created_at', DateRangeFilter)]
+    actions      = ["export_as_csv"]
+
+    def get_rangefilter_created_at_default(self, request):
+        return (datetime.date.today, datetime.date.today)
+    
+    def get_rangefilter_created_at_title(self, request, field_path):
+        return 'save from dates'
+    
+    def has_delete_permission(self, request, obj=None):
+        return False

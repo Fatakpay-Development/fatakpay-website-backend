@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 class FaqCategory(models.Model):
 
     category        =   models.CharField(max_length=255, blank=True, null=True)
+    updated_at      =   models.DateTimeField(auto_now=True, blank=True, null=True,)
 
     created_at      =   models.DateTimeField(auto_now_add=True, blank=True, null=True,)
-    updated_at      =   models.DateTimeField(auto_now=True, blank=True, null=True,)
     is_deleted      =   models.BooleanField(default=False)
     created_by      =   models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     
@@ -54,3 +54,18 @@ class Faq(models.Model):
         db_table = 'Faq'
         verbose_name_plural = 'Faq'
 
+
+class Resources(models.Model):
+    video           = models.FileField(blank=True, null=True,)
+
+    created_at      = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    priority        =  models.FloatField(null=True, blank=True)
+    is_deleted      = models.BooleanField(default = False)
+    created_by      =   models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+        
+    def __str__(self): 
+        return str(self.video)
+
+    class Meta:
+        db_table = "Resources"
+        verbose_name_plural = 'Resources'
