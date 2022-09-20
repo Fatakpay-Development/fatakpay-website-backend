@@ -35,6 +35,8 @@ CORS_ORIGIN_WHITELIST = (
         'https://apiwebsite.fatakpay.com',
         'https://devwebsite.fatakpay.com',
         'http://devwebsite.fatakpay.com',
+        'https://fatakpay.com',
+        'http://fatakpay.com',
         'https://devapiwebsite.fatakpay.com',
         'http://devapiwebsite.fatakpay.com',
 
