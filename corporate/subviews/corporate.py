@@ -36,11 +36,11 @@ class CorporateAPIView(APIView):
                             <td style="border: 1px solid black;padding: 5px;">{customer_name}</td>
                         </tr>
                         <tr>
-                            <th style="border: 1px solid black;padding: 5px;">Email address</th>
+                            <th style="border: 1px solid black;padding: 5px;">Email Address</th>
                             <td style="border: 1px solid black;padding: 5px;">{email_id}</td>
                         </tr>
                         <tr>
-                            <th style="border: 1px solid black;padding: 5px;">Company name</th>
+                            <th style="border: 1px solid black;padding: 5px;">Company Name</th>
                             <td style="border: 1px solid black;padding: 5px;">{company}</td>
                         </tr>
                         <tr>
@@ -48,10 +48,10 @@ class CorporateAPIView(APIView):
                             <td style="border: 1px solid black;padding: 5px;">{location}</td>
                         </tr>
                         <tr>
-                            <th style="border: 1px solid black;padding: 5px;">Mobile no</th>
+                            <th style="border: 1px solid black;padding: 5px;">Mobile No</th>
                             <td style="border: 1px solid black;padding: 5px;">{mobile}</td>
                         </tr>
-                            <th style="border: 1px solid black;padding: 5px;">No. of employee</th>
+                            <th style="border: 1px solid black;padding: 5px;">No. of Employee</th>
                             <td style="border: 1px solid black;padding: 5px;">{numberOfEmp}</td>
                         </tr>
                         </table>
