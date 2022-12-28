@@ -26,11 +26,7 @@ class CorporateAPIView(APIView):
                     status = status.HTTP_400_BAD_REQUEST)
             else:
                 Subject = "Welcome to FatakPay! We’re so glad you’re here"
-                html_content = """<p>Hi, <br><br>{customer_name} has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.</p>
-                        <br>
-                        <br>
-                        <table style="border: 1px solid black;">
-                        <tr>
+                html_content = """<p>Hi, <br><br>{customer_name} has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.</p><br><br><table style="border: 1px solid black;"><tr>
                             <th style="border: 1px solid black;padding: 5px;">Full Name</th>
                             <td style="border: 1px solid black;padding: 5px;">{customer_name}</td>
                         </tr>
@@ -59,7 +55,7 @@ class CorporateAPIView(APIView):
                         <br><br><br>Regards,<br>Team FatakPay
                         </p>
                 
-                """.format(customer_name = customer_name )
+                """.format(customer_name = customer_name, email_id = email_id, company = company, location = location, mobile = mobile, numberOfEmp = numberOfEmp )
                 # html_content = "<p>Hi, <br><br>{customer_name} has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.<br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
                 Message = ""
                 To = ['sales@fatakpay.com',]
