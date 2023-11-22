@@ -80,6 +80,7 @@ class ReferCompanyAPIView(APIView):
             customer_name = serializer.validated_data.get('manager_name')
             manager_email = serializer.validated_data.get('manager_email')
             company_name = serializer.validated_data.get('company_name')
+            manager_mobile = serializer.validated_data.get('manager_mobile')
             numberOfEmp = serializer.validated_data.get('number_of_employees')
             if SignUp.objects.filter(email = manager_email).exists():
                 return Response({
@@ -102,6 +103,10 @@ class ReferCompanyAPIView(APIView):
                         <td style="border: 1px solid black;padding: 5px;">{manager_email}</td>
                     </tr>
                     <tr>
+                        <th style="border: 1px solid black;padding: 5px;">Mobile No</th>
+                        <td style="border: 1px solid black;padding: 5px;">{manager_mobile}</td>
+                    </tr>
+                    <tr>
                         <th style="border: 1px solid black;padding: 5px;">Company Name</th>
                         <td style="border: 1px solid black;padding: 5px;">{company_name}</td>
                     </tr>
@@ -110,7 +115,7 @@ class ReferCompanyAPIView(APIView):
                         <td style="border: 1px solid black;padding: 5px;">{numberOfEmp}</td>
                     </tr>
                 </table>
-                <br><br><br><br>Regards,<br>Team FatakPay</p>""".format(customer_name = customer_name, manager_email = manager_email, company_name = company_name, numberOfEmp = numberOfEmp )
+                <br><br><br><br>Regards,<br>Team FatakPay</p>""".format(customer_name = customer_name, manager_email = manager_email, manager_mobile = manager_mobile, company_name = company_name, numberOfEmp = numberOfEmp )
                 Message = ""
                 To = ['sales@fatakpay.com',]
                 custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')

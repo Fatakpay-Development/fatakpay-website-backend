@@ -26,9 +26,10 @@ class GetTestmonialsListSerializer(serializers.ModelSerializer):
 class PostReferCompanySerializer(serializers.ModelSerializer):
     manager_name = serializers.CharField(required=True)
     manager_email = serializers.CharField(required=True)
+    manager_mobile = serializers.CharField(required=True)
     company_name = serializers.CharField(required=True)
     number_of_employees = serializers.IntegerField(required=True)
 
     class Meta:
         model = ReferCompany
-        fields = ['manager_name','manager_email','company_name','number_of_employees']
+        fields = ['manager_name','manager_email','manager_mobile','company_name','number_of_employees']
