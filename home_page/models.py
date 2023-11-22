@@ -63,7 +63,7 @@ class ReferCompany(models.Model):
     manager_name = models.CharField(max_length=100, blank=False, null=False)
     manager_email = models.CharField(max_length=100, blank=False, null=False)
     company_name = models.CharField(max_length=100, blank=False, null=False)
-    number_of_employees = models.IntegerField(max_length=100, blank=False, null=False)
+    number_of_employees = models.IntegerField(blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True, blank=False, null=False)
     is_deleted = models.BooleanField(default=False)
 
