@@ -17,3 +17,14 @@ class GetCountryDialCodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CountryDialCode
         fields = ["name","dial_code","code"]
+
+
+class ScheduleDemoSerializer(serializers.ModelSerializer):
+    full_name  = serializers.CharField(required=True)
+    email = serializers.CharField(required=True)
+    contact = serializers.CharField(required=True)
+    comment = serializers.CharField()
+
+    class Meta:
+        model = ScheduleDemo
+        fields = ["full_name", "email", "contact", "comment"]
