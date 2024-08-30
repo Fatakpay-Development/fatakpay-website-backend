@@ -72,11 +72,6 @@ class ffplContactUserListAPIView(APIView):
         if serializer.is_valid():
             email_id = serializer.validated_data.get('email')
             customer_name = serializer.validated_data.get('full_name')
-            Subject = "Thank you for getting in touch!"
-            html_content = "<p>Hello {customer_name}, <br><br>We have received your message and would like to thank you for writing to us. One of our colleagues<br><br> will get back in touch with you soon! <br>If your inquiry is urgent, please call us on +91 8976226669 to talk to one of our staff members. <br><br> <br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
-            Message = ""
-            To = [email_id,]
-            custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
             serializer.save(email=email_id)
             # serializer.save()
             return Response({

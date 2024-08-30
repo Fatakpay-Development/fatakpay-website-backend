@@ -100,11 +100,7 @@ class ScheduleDemoAPIView(APIView):
     def post(self, request, format= None):
         serializer = ScheduleDemoSerializer(data= request.data)
         if serializer.is_valid():
-            full_name = serializer.validated_data.get('full_name')
             email = serializer.validated_data.get('email')
-            contact = serializer.validated_data.get('contact')
-            comment = serializer.validated_data.get('comment')
-            pricing = serializer.validated_data.get('pricing')
             if ScheduleDemo.objects.filter(email = email).exists():
                 return Response({
                     'success' : False,
@@ -113,33 +109,6 @@ class ScheduleDemoAPIView(APIView):
                     'data' : serializer.errors
                 }, status=status.HTTP_400_BAD_REQUEST)
             else:
-                Subject = "Welcome to FatakPay! We’re so glad you’re here"
-                html_content = """<p>Hi, <br><br>{customer_name} has shown interest in a demo of FatakPay and has shared their details. Kindly call him/her and inquire.</p><br><br><table style="border: 1px solid black;"><tr>
-                            <th style="border: 1px solid black;padding: 5px;">Full Name</th>
-                            <td style="border: 1px solid black;padding: 5px;">{full_name}</td>
-                        </tr>
-                        <tr>
-                            <th style="border: 1px solid black;padding: 5px;">Email Address</th>
-                            <td style="border: 1px solid black;padding: 5px;">{email}</td>
-                        </tr>                       
-                        <tr>
-                            <th style="border: 1px solid black;padding: 5px;">Mobile No</th>
-                            <td style="border: 1px solid black;padding: 5px;">{contact}</td>
-                        </tr>
-                            <th style="border: 1px solid black;padding: 5px;">Pricing</th>
-                            <td style="border: 1px solid black;padding: 5px;">{pricing}</td>
-                        </tr>
-                        </table>
-
-                        <p>
-                        <br><br><br>Regards,<br>Team FatakPay
-                        </p>
-                
-                """.format(full_name = full_name, email = email, contact = contact, pricing = pricing )
-                # html_content = "<p>Hi, <br><br>{customer_name} has shown interest in a demo of FatakPay and has shared their company details. Kindly call him/her and inquire.<br><br><br>Regards,<br>Team FatakPay</p>".format(customer_name = customer_name )
-                Message = ""
-                To = ['sales@fatakpay.com',]
-                custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
                 serializer.save(email = email)
                 return Response({
                     'success' : True,
