@@ -43,3 +43,4 @@ env/
 env_fatak/
 newrelic.ini
 *.pyc
+pyvenv.cfg

@@ -6,4 +6,5 @@ from contact_us.views import *
 urlpatterns = [
     
     path('v1/contact_us/', ContactUsListAPIView.as_view()),
+    path('v1/ffplai-contactUser/', ffplContactUserListAPIView.as_view())
 ]
