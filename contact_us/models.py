@@ -19,7 +19,7 @@ class ContactUs(models.Model):
         db_table = "ContactUs"
         verbose_name_plural = 'ContactUs'
 
-class ContactUser(models.Model):
+class ffplContactUser(models.Model):
     full_name = models.CharField(max_length=100, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
     message = models.TextField(null=True, blank=True)
@@ -31,5 +31,5 @@ class ContactUser(models.Model):
         return str(self.full_name)
     
     class Meta:
-        db_table = "ContactUser"
-        verbose_name_plural = 'ContactUser'
+        db_table = "ffplContactUser"
+        verbose_name_plural = 'ffplContactUser'
