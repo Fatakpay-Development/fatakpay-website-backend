@@ -51,3 +51,38 @@ class ContactUsListAPIView(APIView):
                 'data': serializer.data},
                 status = status.HTTP_201_CREATED) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#fatakpay Ai contact user form API
+class ffplContactUserListAPIView(APIView):
+    def get(self, request, format=None):
+        print("gURv the baaps")
+        data = ffplContactUser.objects.get(is_deleted=False)
+        print('dara', data)
+        serializer = GetffplContactUserSerializer(data, many=True)
+        return Response({
+            'success': True,
+            'status_code': status.HTTP_200_OK,
+            'message': 'ContactUs List Fetch SuccessFully',
+            'data': serializer.data},
+            status=status.HTTP_200_OK)
+
+    def post(self, request, format=None):
+        serializer = PostffplContactUserSerializer(data=request.data)
+        if serializer.is_valid():
+            email_id = serializer.validated_data.get('email')
+            customer_name = serializer.validated_data.get('full_name')
+            Subject = "Thank you for getting in touch!"
+            html_content = "<p>Hello {customer_name}, <br><br>We have received your message and would like to thank you for writing to us. One of our colleagues<br><br> will get back in touch with you soon! <br>If your inquiry is urgent, please call us on +91 8976226669 to talk to one of our staff members. <br><br> <br> Talk to you soon, <br> Team FatakPay</p>".format(customer_name = customer_name )
+            Message = ""
+            To = [email_id,]
+            custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com')
+            serializer.save(email=email_id)
+            # serializer.save()
+            return Response({
+                'success': True,
+                'status_code': status.HTTP_201_CREATED,
+                'message': 'ContactUs Data saved SuccessFully',
+                'data': serializer.data},
+                status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
