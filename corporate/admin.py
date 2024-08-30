@@ -34,11 +34,3 @@ class CountryDialCodeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         # Disable delete
         return False
-    
-    
-@admin.register(ScheduleDemo)
-class ScheduleDemoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ("full_name","email", "contact", "comment", "pricing")
-
-    def has_delete_permission(self, request, obj):
-        return False
