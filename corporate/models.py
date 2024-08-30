@@ -49,3 +49,27 @@ class CountryDialCode(models.Model):
     class Meta:
         db_table = "CountryDialCode"
         verbose_name_plural = 'CountryDialCode'
+
+
+class ScheduleDemo(models.Model):
+    full_name = models.CharField(max_length=100, null= True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
+    conatct = models.CharField(max_length=100, null=True, blank=True)
+    pricing = models.CharField(max_length=100, null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    is_deleted = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.full_name)
+    
+    class Meta:
+        db_table = "ScheduleDemo"
+        verbose_name_plural = 'ScheduleDemo' 
+
+
+
+
+
