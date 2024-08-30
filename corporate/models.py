@@ -54,7 +54,7 @@ class CountryDialCode(models.Model):
 class ScheduleDemo(models.Model):
     full_name = models.CharField(max_length=100, null= True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
-    conatct = models.CharField(max_length=100, null=True, blank=True)
+    contact = models.CharField(max_length=100, null=True, blank=True)
     pricing = models.CharField(max_length=100, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
 
