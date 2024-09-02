@@ -23,8 +23,8 @@ class ScheduleDemoSerializer(serializers.ModelSerializer):
     full_name  = serializers.CharField(required=True)
     email = serializers.CharField(required=True)
     contact = serializers.CharField(required=True)
-    comment = serializers.CharField(required=False)
-    pricing = serializers.CharField(required=False)
+    comment = serializers.CharField()
+    pricing = serializers.CharField()
 
     class Meta:
         model = ScheduleDemo
