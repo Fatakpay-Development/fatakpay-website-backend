@@ -99,6 +99,7 @@ class CountryDialCodeAPIView(APIView):
 class ScheduleDemoAPIView(APIView):
     def post(self, request, format= None):
         serializer = ScheduleDemoSerializer(data= request.data)
+        print(serializer)
         if serializer.is_valid():
             email = serializer.validated_data.get('email')
             if ScheduleDemo.objects.filter(email = email).exists():
