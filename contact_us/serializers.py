@@ -26,7 +26,7 @@ class GetffplContactUserSerializer(serializers.ModelSerializer):
 class PostffplContactUserSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(required=True)
     email = serializers.CharField(required=True)
-    message = serializers.CharField(required=True, max_length=None, min_length=None,)
+    message = serializers.CharField(required=False, max_length=None, min_length=None,allow_blank=True, allow_null=True)
 
     class Meta:
         model = ffplContactUser
