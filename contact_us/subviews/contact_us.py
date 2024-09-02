@@ -80,4 +80,10 @@ class ffplContactUserListAPIView(APIView):
                 'message': 'ContactUs Data saved SuccessFully',
                 'data': serializer.data},
                 status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            'success': False,
+            'status_code': status.HTTP_200_OK,
+            'message': serializer.errors,
+            'data': None},
+            status=status.HTTP_200_OK)
