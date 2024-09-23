@@ -95,7 +95,7 @@ class ApplicationFormAPIView(APIView):
             To = [email_id,]
             custom_mail(Subject, Message, To, html_content, 'help@fatakpay.com') 
             Hr_Subject = "CV received."
-            Hr_to = ['jamir@fatakpay.com',]
+            Hr_to = ['hrd@fatakpay.com',]
             Hr_html_content = "<p>Hello HR, <br><br>You have received an application for {designation} from {customer_name}.".format(customer_name = customer_name, designation = designation )
             custom_mail(Hr_Subject, Message, Hr_to, Hr_html_content, 'help@fatakpay.com', resume)
             serializer.save(status=True)
